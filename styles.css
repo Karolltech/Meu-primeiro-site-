@@ -1,0 +1,551 @@
+* { 
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+} 
+
+:root {
+   --gradient: linear-gradient(
+    to right,
+     #389fff,
+     #0c75ff,
+     rgba(19, 3, 248, 0.8)
+   );
+   --primary-color: #389fff;
+   --secondary-color: #0c75ff;
+   --text-color: #e4d9d9;
+   --bg-dark: #0a0a0a;
+   --bg-gradient: linear-gradient(135deg, #0a0a0a 0%, #1a0033 50%, #0a0a0a 100%);
+}
+
+/* Header Styles */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(56, 159, 255, 0.2);
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.navbar {
+    padding: 0 20px;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px 0;
+}
+
+.nav-logo {
+    flex-shrink: 0;
+    position: relative;
+}
+
+.nav-logo-img {
+    height: 50px;
+    width: auto;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: drop-shadow(0 0 10px rgba(56, 159, 255, 0.3));
+    border-radius: 8px;
+    padding: 5px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+}
+
+.nav-logo-img:hover {
+    transform: scale(1.1) rotate(2deg);
+    filter: drop-shadow(0 0 20px rgba(56, 159, 255, 0.6)) brightness(1.2);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-logo::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    border-radius: 10px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.nav-logo:hover::before {
+    opacity: 0.3;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    align-items: center;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-link {
+    color: var(--text-color);
+    text-decoration: none;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    transition: color 0.3s ease;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+.nav-link:hover {
+    color: var(--primary-color);
+    background: rgba(56, 159, 255, 0.1);
+}
+
+/* Dropdown Styles */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(56, 159, 255, 0.2);
+    border-radius: 8px;
+    min-width: 200px;
+    list-style: none;
+    padding: 6px;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 1001;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+}
+
+/* Quando não está hidden (aberto via JS) */
+.dropdown-menu:not([hidden]) {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Mantém display:block para a transição funcionar */
+.dropdown-menu[hidden] {
+    display: block !important;
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+}
+
+.dropdown-link {
+    display: block;
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 12px 20px;
+    transition: all 0.3s ease;
+    border-radius: 6px;
+    margin: 5px;
+}
+
+.dropdown-link:hover {
+    color: var(--primary-color);
+    background: rgba(56, 159, 255, 0.1);
+    transform: translateX(5px);
+}
+
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background: var(--text-color);
+    margin: 3px 0;
+    transition: 0.3s;
+    border-radius: 2px;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background: rgba(10, 10, 10, 0.95);
+        backdrop-filter: blur(10px);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        padding: 20px 0;
+        gap: 0;
+        align-items: center;
+    }
+    
+    .nav-menu.active {
+        left: 0;
+    }
+    
+    .nav-item {
+        margin: 16px 0;
+    }
+    
+    .dropdown-menu {
+        position: static;
+        transform: none !important;
+        background: rgba(26, 0, 51, 0.9);
+        border: none;
+        box-shadow: none;
+        margin-top: 10px;
+        padding: 0;
+    }
+
+    .dropdown-menu:not([hidden]) {
+        opacity: 1;
+        pointer-events: auto;
+    }
+    
+    .dropdown-link {
+        margin: 0;
+        padding: 10px 20px;
+    }
+    
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+}
+
+body {
+ font-family: "Poppins", "Rancho", cursive;
+ min-height: 100vh;
+ background: var(--bg-gradient);
+ color: #e4d9d9;
+ display: grid;
+ justify-items: center;
+ align-items: start;
+ padding-top: 120px;
+ position: relative;
+ overflow-x: hidden;
+}
+
+body::before {
+ content: '';
+ position: fixed;
+ top: 0;
+ left: 0;
+ right: 0;
+ bottom: 0;
+ background: radial-gradient(circle at 20% 50%, rgba(56, 159, 255, 0.1) 0%, transparent 50%),
+             radial-gradient(circle at 80% 80%, rgba(12, 117, 255, 0.1) 0%, transparent 50%);
+ pointer-events: none;
+ z-index: 1;
+}
+
+.logo {
+    position: absolute;
+    top: 100px;
+    left: 20px;
+    width: 220px;
+    max-width: 90vw;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 10;
+    filter: drop-shadow(0 0 30px rgba(56, 159, 255, 0.4))
+            drop-shadow(0 0 60px rgba(12, 117, 255, 0.2));
+    border-radius: 15px;
+    padding: 10px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: logoEntrance 1.5s ease-out, logoGlow 3s ease-in-out 1.5s infinite alternate;
+    opacity: 0;
+    transform: scale(0.8) translateY(-20px);
+}
+
+.logo.show {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
+.logo:hover {
+    transform: scale(1.1) translateY(-5px) rotate(1deg);
+    filter: drop-shadow(0 0 50px rgba(56, 159, 255, 0.8))
+            drop-shadow(0 0 100px rgba(12, 117, 255, 0.4))
+            brightness(1.3) contrast(1.1);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+    border-color: rgba(56, 159, 255, 0.3);
+}
+
+@keyframes logoGlow {
+    0% {
+        filter: drop-shadow(0 0 30px rgba(56, 159, 255, 0.4))
+                drop-shadow(0 0 60px rgba(12, 117, 255, 0.2));
+    }
+    100% {
+        filter: drop-shadow(0 0 40px rgba(56, 159, 255, 0.6))
+                drop-shadow(0 0 80px rgba(12, 117, 255, 0.3));
+    }
+}
+
+.logo::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--primary-color));
+    border-radius: 20px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    animation: borderGlow 4s ease-in-out infinite;
+}
+
+.logo:hover::after {
+    opacity: 0.6;
+}
+
+@keyframes borderGlow {
+    0%, 100% {
+        opacity: 0.2;
+    }
+    50% {
+        opacity: 0.4;
+    }
+}
+
+/* Mobile logo adjustments */
+@media (max-width: 768px) {
+    .logo {
+        top: 90px;
+        left: 15px;
+        width: 150px;
+    }
+    
+    .nav-logo-img {
+        height: 40px;
+    }
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+h1 {
+    font-family: "Chonburi", serif;
+    font-size: 4.5rem;
+    background: var(--gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    margin: 0 0 32px 0;
+    text-align: center;
+}
+
+.chonburi-regular {
+  font-family: "Chonburi", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+
+@keyframes logoEntrance {
+    0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(-20px) rotate(-5deg);
+        filter: blur(10px);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.05) translateY(5px) rotate(2deg);
+        filter: blur(2px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0) rotate(0deg);
+        filter: blur(0px);
+    }
+}
+
+p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: rgba(228, 217, 217, 0.95);
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+}
+
+p:hover {
+ color: rgba(228, 217, 217, 1);
+}
+
+p:first-of-type {
+ font-size: 1.3rem;
+ font-weight: 500;
+ margin-bottom: 30px;
+}
+
+/* ── CTA Buttons ─────────────────────────────────────────────────────────── */
+.cta-buttons {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center;     /* Alinha os botões um com o outro verticalmente */
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+    width: 100%;             /* Garante que ocupe todo o espaço do hero */
+    animation: fadeInUp 1s ease-out 0.5s both;
+}
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center; /* Garante conteúdo centralizado dentro do botão */
+    gap: 10px;
+    padding: 14px 32px;
+    border-radius: 12px;
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    /* Adicionamos uma borda transparente para igualar o tamanho ao btn-outline */
+    border: 1.5px solid transparent; 
+}
+
+.btn-primary {
+    background: var(--gradient);
+    color: #fff;
+    /* A borda aqui continua "invisível", mas ocupa espaço */
+    border: 1.5px solid transparent; 
+    box-shadow: 0 4px 20px rgba(56, 159, 255, 0.35);
+}
+
+/* Ripple effect ao hover */
+.btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.08);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+.btn:hover::before { opacity: 1; }
+
+.btn:active {
+    transform: scale(0.97) !important;
+}
+
+/* Botão primário — gradiente azul sólido */
+/*.btn-primary {
+    background: var(--gradient);
+    color: #fff;
+    border: none;
+    box-shadow: 0 4px 20px rgba(56, 159, 255, 0.35),
+                0 0 0 1px rgba(56, 159, 255, 0.2);
+}*/
+
+.btn-primary:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 35px rgba(56, 159, 255, 0.55),
+                0 0 0 1px rgba(56, 159, 255, 0.4);
+    filter: brightness(1.1);
+}
+
+/* Botão outline — borda azul, fundo glass */
+.btn-outline {
+    background: rgba(56, 159, 255, 0.07);
+    color: var(--primary-color);
+    border: 1.5px solid rgba(56, 159, 255, 0.45);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(56, 159, 255, 0.1);
+}
+
+.btn-outline:hover {
+    transform: translateY(-3px) scale(1.03);
+    background: rgba(56, 159, 255, 0.14);
+    border-color: rgba(56, 159, 255, 0.75);
+    box-shadow: 0 8px 30px rgba(56, 159, 255, 0.25);
+    color: #fff;
+}
+
+.btn-icon {
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+}
+
+.btn:hover .btn-icon {
+    transform: scale(1.25) rotate(-5deg);
+}
+
+/* Responsivo mobile */
+@media (max-width: 768px) {
+    .cta-buttons {
+        flex-direction: row; /* Mantém lado a lado */
+        justify-content: center;
+        flex-wrap: nowrap; /* Evita que quebrem a linha */
+        gap: 12px;
+        margin-top: 30px;
+    }
+
+    .btn {
+        width: auto;
+        padding: 12px 16px; /* Reduz o padding para caberem na tela */
+        font-size: 0.9rem; /* Diminui a fonte levemente */
+    }
+}
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+

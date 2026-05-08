@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Minha História - Blue & Soluções">
+    <title>Minha História - Blue & Soluções</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chonburi&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="BS.png">
+    <style>
+        *, *::before, *::after {
+            margin: 0; padding: 0; box-sizing: border-box;
+        }
+
+        :root {
+            --gradient: linear-gradient(to right, #389fff, #0c75ff, rgba(19, 3, 248, 0.9));
+            --blue-light: #389fff;
+            --blue-main: #0c75ff;
+            --blue-deep: rgba(19, 3, 248, 0.9);
+            --bg-dark: #0a0a0a;
+            --bg-purple: #1a0033;
+            --text-main: #e4d9d9;
+            --text-muted: rgba(228, 217, 217, 0.75);
+            --glass-bg: rgba(10, 10, 10, 0.95);
+            --glass-border: rgba(56, 159, 255, 0.2);
+            --header-height: 80px;
+        }
+
+        .sr-only {
+            position: absolute; width: 1px; height: 1px;
+            padding: 0; margin: -1px; overflow: hidden;
+            clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+        }
+
+        .skip-link {
+            position: absolute; top: -100%; left: 0;
+            background: var(--blue-main); color: #fff;
+            padding: 10px 20px; font-family: "Poppins", sans-serif;
+            font-size: 14px; font-weight: 600; text-decoration: none;
+            border-radius: 0 0 8px 0; z-index: 9999;
+            transition: top 0.2s ease;
+        }
+        .skip-link:focus { top: 0; }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-purple) 50%, var(--bg-dark) 100%);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed; inset: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(56,159,255,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(12,117,255,0.08) 0%, transparent 50%);
+            pointer-events: none; z-index: 0;
+        }
+
+        /* ── HEADER ── */
+        .header {
+            position: fixed; top: 0; left: 0; right: 0;
+            height: var(--header-height);
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+            transition: box-shadow 0.3s ease;
+        }
+        .header.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.4); }
+
+        .navbar { height: 100%; padding: 0 20px; }
+
+        .nav-container {
+            display: flex; justify-content: space-between;
+            align-items: center; height: 100%;
+            max-width: 1200px; margin: 0 auto;
+        }
+
+        .nav-logo a { display: flex; align-items: center; }
+        .nav-logo-img {
+            height: 48px; width: auto;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            filter: drop-shadow(0 0 8px rgba(56,159,255,0.3));
+        }
+        .nav-logo-img:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 14px rgba(56,159,255,0.6));
+        }
+
+        .nav-menu { display: flex; list-style: none; gap: 8px; align-items: center; }
+        .nav-item { position: relative; }
+
+        .nav-link, .dropdown-toggle {
+            display: inline-flex; align-items: center; gap: 6px;
+            color: var(--text-main); text-decoration: none;
+            font-family: "Poppins", sans-serif; font-weight: 500;
+            font-size: 15px; padding: 8px 14px; border-radius: 8px;
+            transition: color 0.25s ease, background 0.25s ease;
+            background: none; border: none; cursor: pointer; white-space: nowrap;
+        }
+        .nav-link:hover, .dropdown-toggle:hover,
+        .dropdown-toggle[aria-expanded="true"] {
+            color: var(--blue-light);
+            background: rgba(56,159,255,0.1);
+        }
+
+        .dropdown-arrow { font-size: 10px; transition: transform 0.25s ease; display: inline-block; }
+        .dropdown-toggle[aria-expanded="true"] .dropdown-arrow { transform: rotate(180deg); }
+
+        .dropdown-menu {
+            position: absolute; top: calc(100% + 8px); left: 0;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border); border-radius: 10px;
+            min-width: 210px; padding: 6px; z-index: 1001;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.4); list-style: none;
+            opacity: 0; transform: translateY(-8px);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            pointer-events: none;
+        }
+        .dropdown-menu:not([hidden]) { opacity: 1; transform: translateY(0); pointer-events: auto; }
+        .dropdown-menu[hidden] { display: block !important; opacity: 0; transform: translateY(-8px); pointer-events: none; }
+
+        .dropdown-link {
+            display: block; color: var(--text-main); text-decoration: none;
+            font-family: "Poppins", sans-serif; font-size: 14px; font-weight: 400;
+            padding: 10px 16px; border-radius: 7px;
+            transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+        }
+        .dropdown-link:hover { color: var(--blue-light); background: rgba(56,159,255,0.1); transform: translateX(4px); }
+        .dropdown-link.active { color: var(--blue-light); background: rgba(56,159,255,0.12); }
+
+        .hamburger {
+            display: none; flex-direction: column; justify-content: center;
+            gap: 5px; cursor: pointer; background: none; border: none;
+            padding: 8px; border-radius: 6px; transition: background 0.2s ease;
+        }
+        .hamburger:hover { background: rgba(56,159,255,0.1); }
+        .bar { display: block; width: 24px; height: 2px; background: var(--text-main); border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease; }
+        .hamburger.active .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.active .bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .hamburger.active .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        /* ── MAIN ── */
+        main {
+            position: relative; z-index: 1;
+            padding-top: var(--header-height);
+        }
+
+        /* ── HERO ── */
+        .page-hero {
+            padding: 80px 24px 60px;
+            text-align: center;
+            animation: fadeInUp 0.9s ease-out both;
+        }
+
+        .page-hero .breadcrumb {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 13px; color: var(--text-muted); margin-bottom: 24px;
+        }
+        .page-hero .breadcrumb a {
+            color: var(--blue-light); text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        .page-hero .breadcrumb a:hover { opacity: 0.75; }
+        .page-hero .breadcrumb span { opacity: 0.4; }
+
+        .page-hero h1 {
+            font-family: "Chonburi", serif;
+            font-size: clamp(2.4rem, 6vw, 4.2rem);
+            background: var(--gradient);
+            background-clip: text; -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; color: transparent;
+            margin-bottom: 20px; line-height: 1.1;
+        }
+
+        .page-hero .subtitle {
+            font-size: clamp(1rem, 2.2vw, 1.15rem);
+            color: var(--text-muted); font-weight: 300;
+            max-width: 560px; margin: 0 auto; line-height: 1.7;
+        }
+
+        /* ── DIVIDER ── */
+        .divider {
+            display: flex; align-items: center;
+            max-width: 900px; margin: 0 auto 64px;
+            padding: 0 24px; gap: 16px;
+        }
+        .divider-line {
+            flex: 1; height: 1px;
+            background: linear-gradient(to right, transparent, var(--glass-border), transparent);
+        }
+        .divider-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--blue-main);
+            box-shadow: 0 0 12px rgba(12,117,255,0.6);
+        }
+
+        /* ── STORY SECTION ── */
+        .story-section {
+            max-width: 900px; margin: 0 auto;
+            padding: 0 24px 100px;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute; left: 12px; top: 8px;
+            width: 2px; bottom: 0;
+            background: linear-gradient(to bottom, var(--blue-main), var(--blue-deep), transparent);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 56px;
+            animation: fadeInUp 0.7s ease-out both;
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+        .timeline-item:nth-child(5) { animation-delay: 0.5s; }
+
+        .timeline-dot {
+            position: absolute;
+            left: -34px; top: 6px;
+            width: 16px; height: 16px;
+            border-radius: 50%;
+            background: var(--blue-main);
+            border: 3px solid var(--bg-dark);
+            box-shadow: 0 0 16px rgba(12,117,255,0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .timeline-item:hover .timeline-dot {
+            transform: scale(1.3);
+            box-shadow: 0 0 24px rgba(56,159,255,0.8);
+        }
+
+        .timeline-year {
+            font-size: 12px; font-weight: 600; letter-spacing: 2px;
+            text-transform: uppercase;
+            background: var(--gradient);
+            background-clip: text; -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .timeline-card {
+            background: rgba(56,159,255,0.04);
+            border: 1px solid var(--glass-border);
+            border-radius: 14px;
+            padding: 24px 28px;
+            transition: background 0.3s, border-color 0.3s, transform 0.3s;
+        }
+
+        .timeline-item:hover .timeline-card {
+            background: rgba(56,159,255,0.08);
+            border-color: rgba(56,159,255,0.35);
+            transform: translateX(6px);
+        }
+
+        .timeline-card h2 {
+            font-family: "Chonburi", serif;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            color: var(--text-main);
+            margin-bottom: 12px;
+        }
+
+        .timeline-card p {
+            font-size: 15px; line-height: 1.8;
+            color: var(--text-muted); font-weight: 300;
+        }
+
+        /* ── CTA ── */
+        .cta-section {
+            text-align: center;
+            padding: 0 24px 100px;
+            animation: fadeInUp 0.9s ease-out 0.5s both;
+        }
+
+        .cta-box {
+            max-width: 600px; margin: 0 auto;
+            background: rgba(56,159,255,0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 48px 40px;
+        }
+
+        .cta-box h3 {
+            font-family: "Chonburi", serif;
+            font-size: clamp(1.4rem, 3.5vw, 2rem);
+            background: var(--gradient);
+            background-clip: text; -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 14px;
+        }
+
+        .cta-box p {
+            font-size: 15px; color: var(--text-muted);
+            font-weight: 300; line-height: 1.7; margin-bottom: 32px;
+        }
+
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: var(--gradient);
+            color: #fff; font-family: "Poppins", sans-serif;
+            font-weight: 600; font-size: 15px;
+            padding: 14px 32px; border-radius: 10px;
+            text-decoration: none; border: none; cursor: pointer;
+            transition: opacity 0.25s, transform 0.25s, box-shadow 0.25s;
+            box-shadow: 0 4px 24px rgba(12,117,255,0.35);
+        }
+        .btn-primary:hover {
+            opacity: 0.9; transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(12,117,255,0.5);
+        }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── MOBILE ── */
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+
+            .nav-menu {
+                position: fixed; top: var(--header-height); left: -100%;
+                width: 100%; flex-direction: column; align-items: stretch;
+                background: var(--glass-bg); backdrop-filter: blur(12px);
+                padding: 16px 12px 24px; gap: 4px;
+                transition: left 0.3s ease;
+                box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+                overflow-y: auto; max-height: calc(100vh - var(--header-height));
+            }
+            .nav-menu.active { left: 0; }
+
+            .nav-link, .dropdown-toggle {
+                width: 100%; justify-content: space-between;
+                padding: 12px 16px; font-size: 16px; border-radius: 10px;
+            }
+
+            .dropdown-menu {
+                position: static;
+                background: rgba(56,159,255,0.05);
+                border: 1px solid rgba(56,159,255,0.1);
+                border-radius: 10px; margin-top: 4px;
+                transform: none !important; box-shadow: none;
+            }
+            .dropdown-menu:not([hidden]) { opacity: 1; pointer-events: auto; }
+            .dropdown-menu[hidden] { display: none !important; }
+
+            .timeline { padding-left: 28px; }
+            .timeline-dot { left: -22px; }
+            .timeline-card { padding: 18px 20px; }
+            .cta-box { padding: 36px 24px; }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
+
+    <header class="header" role="banner">
+        <nav class="navbar" role="navigation" aria-label="Navegação principal">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="index.html" aria-label="Voltar para o início">
+                        <img src="BS.png" alt="Blue & Soluções" class="nav-logo-img">
+                    </a>
+                </div>
+
+                <ul class="nav-menu" id="nav-menu" role="menubar">
+                    <li class="nav-item" role="none">
+                        <a href="index.html" class="nav-link" role="menuitem">Principal</a>
+                    </li>
+                    <li class="nav-item dropdown" role="none">
+                        <button class="nav-link dropdown-toggle" role="menuitem"
+                                aria-haspopup="true" aria-expanded="false"
+                                aria-controls="services-menu" id="services-button">
+                            Serviços <span class="dropdown-arrow" aria-hidden="true">▼</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="services-button" id="services-menu" hidden>
+                            <li role="none"><a href="#" class="dropdown-link" role="menuitem">Desenvolvimento Web</a></li>
+                            <li role="none"><a href="#" class="dropdown-link" role="menuitem">Consultoria</a></li>
+                            <li role="none"><a href="#" class="dropdown-link" role="menuitem">Manutenção</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown" role="none">
+                        <button class="nav-link dropdown-toggle" role="menuitem"
+                                aria-haspopup="true" aria-expanded="false"
+                                aria-controls="about-menu" id="about-button">
+                            Sobre <span class="dropdown-arrow" aria-hidden="true">▼</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="about-button" id="about-menu" hidden>
+                            <li role="none"><a href="nossa-historia.html" class="dropdown-link active" role="menuitem">Nossa História</a></li>
+                            <li role="none"><a href="#" class="dropdown-link" role="menuitem">Equipe</a></li>
+                            <li role="none"><a href="#" class="dropdown-link" role="menuitem">Valores</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a href="index.html#contact" class="nav-link" role="menuitem">Contato</a>
+                    </li>
+                </ul>
+
+                <button class="hamburger" aria-label="Abrir menu de navegação"
+                        aria-expanded="false" aria-controls="nav-menu">
+                    <span class="bar" aria-hidden="true"></span>
+                    <span class="bar" aria-hidden="true"></span>
+                    <span class="bar" aria-hidden="true"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content" role="main">
+
+        <section class="page-hero">
+            <p class="breadcrumb">
+                <a href="index.html">Principal</a>
+                <span>›</span>
+                Sobre
+                <span>›</span>
+                Minha História
+            </p>
+            <h1>Minha História</h1>
+            <p class="subtitle">
+               Transformo o aprendizado em tecnologia em soluções digitais que fazem a diferença para o seu negócio.
+            </p>
+        </section>
+
+        <div class="divider">
+            <div class="divider-line"></div>
+            <div class="divider-dot"></div>
+            <div class="divider-line"></div>
+        </div>
+
+        <section class="story-section" aria-label="Linha do tempo">
+            <div class="timeline">
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <p class="timeline-year">2026 — O Começo</p>
+                    <div class="timeline-card">
+                        <h2>Uma ideia, uma missão</h2>
+                        <p>A Blue & Soluções nasceu do meu desejo de transformar linhas de código em resultados reais. Atualmente cursando Análise e Desenvolvimento de Sistemas, criei este espaço como um laboratório de inovação, onde aplico o que há de mais moderno em desenvolvimento para criar projetos sólidos e eficientes.
+                           Meu objetivo é simples: usar minha paixão por tecnologia para ajudar você a construir uma presença digital de qualidade. Cada projeto é para mim uma oportunidade de entregar excelência, unindo a dedicação de quem está sempre aprendendo com o compromisso de quem entrega soluções profissionais.
+                        </p>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="cta-box">
+                <h3>Vamos construir juntos?</h3>
+                <p>Cada projeto é uma nova história. Conte pra mim o que você tem em mente e vou dar vida à sua ideia.</p>
+                <a href="index.html#contact" class="btn-primary">
+                    Falar com a Blue
+                    <span aria-hidden="true">→</span>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <div class="sr-only" aria-live="polite" aria-atomic="true" id="sr-status"></div>
+
+    <script>
+        // ── Hamburger ──
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu   = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            const isOpen = hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active', isOpen);
+            hamburger.setAttribute('aria-expanded', String(isOpen));
+            hamburger.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu de navegação');
+        });
+
+        navMenu.querySelectorAll('a.nav-link').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        function closeMobileMenu() {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+            hamburger.setAttribute('aria-label', 'Abrir menu de navegação');
+        }
+
+        // ── Dropdowns ──
+        const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+
+        dropdownToggles.forEach(toggle => {
+            const menu = document.getElementById(toggle.getAttribute('aria-controls'));
+            if (!menu) return;
+
+            toggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isOpen = !menu.hidden;
+                closeAllDropdowns(menu);
+                menu.hidden = isOpen;
+                toggle.setAttribute('aria-expanded', String(!isOpen));
+            });
+
+            toggle.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    menu.hidden = true;
+                    toggle.setAttribute('aria-expanded', 'false');
+                    toggle.focus();
+                }
+            });
+
+            menu.querySelectorAll('.dropdown-link').forEach(link => {
+                link.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        menu.hidden = true;
+                        toggle.setAttribute('aria-expanded', 'false');
+                        toggle.focus();
+                    }
+                });
+                link.addEventListener('click', () => {
+                    menu.hidden = true;
+                    toggle.setAttribute('aria-expanded', 'false');
+                    closeMobileMenu();
+                });
+            });
+        });
+
+        document.addEventListener('click', () => closeAllDropdowns());
+
+        function closeAllDropdowns(except) {
+            dropdownToggles.forEach(toggle => {
+                const menu = document.getElementById(toggle.getAttribute('aria-controls'));
+                if (!menu || menu === except) return;
+                menu.hidden = true;
+                toggle.setAttribute('aria-expanded', 'false');
+            });
+        }
+
+        // ── Header shadow on scroll ──
+        const header = document.querySelector('.header');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 20);
+        }, { passive: true });
+    </script>
+</body>
+</html>

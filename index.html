@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue & Soluções</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chonburi&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <img src="BS.png" alt="Blue & Soluções" class="nav-logo-img">
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Principal</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle"
+                           aria-haspopup="true" aria-expanded="false"
+                           aria-controls="services-menu" id="services-button">Serviços ▼</a>
+                        <ul class="dropdown-menu" id="services-menu" hidden>
+                            <li><a href="#" class="dropdown-link">Desenvolvimento Web</a></li>
+                            <li><a href="#" class="dropdown-link">Consultoria</a></li>
+                            <li><a href="#" class="dropdown-link">Manutenção</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle"
+                           aria-haspopup="true" aria-expanded="false"
+                           aria-controls="about-menu" id="about-button">Sobre ▼</a>
+                        <ul class="dropdown-menu" id="about-menu" hidden>
+                            <li><a href="minha-historia.html" class="dropdown-link">Minha História</a></li>
+                            <li><a href="#" class="dropdown-link">Equipe</a></li>
+                            <li><a href="#" class="dropdown-link">Valores</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Contato</a>
+                    </li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <main>
+        <img src="BS.png" alt="Blue & Soluções - Logo da empresa de desenvolvimento web e soluções digitais" class="logo">
+
+        <section class="hero">
+            <h1>Blue & Soluções</h1>
+
+            <p>Seu negócio não pode ser invisível. A Blue cria seu palco digital.</p>
+            <p>Código limpo, resultados sólidos.
+               Do rascunho ao deploy: tecnologia de ponta para o seu projeto.
+               Sites rápidos, seguros e otimizados para o Google.<br>
+               Arquitetando o futuro da sua empresa na web.</p>
+
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary">
+                    <span class="btn-icon">🚀</span>
+                    Começar o seu projeto
+                </a>
+                <a href="minha-historia.html" class="btn btn-outline">
+                    <span class="btn-icon">✦</span>
+                    Conhecer a Blue
+                </a>
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+    <script>
+        // Aplica classe .show na logo para ativar a animação de entrada
+        const logoEl = document.querySelector('.logo');
+        if (logoEl) {
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => logoEl.classList.add('show'));
+            });
+        }
+    </script>
+</body>
+</html>
