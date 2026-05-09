@@ -418,24 +418,20 @@ p:first-of-type {
   p  { font-size: 0.95rem; }
   p:first-of-type { font-size: 1.05rem; }
 
-  /* Botões lado a lado; empilham só abaixo de 380px */
+  /* Botões empilhados em coluna no mobile */
   .cta-buttons {
-    flex-wrap: nowrap;
-    gap: 10px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
     margin-top: 24px;
   }
 
   .btn {
-    flex: 1;
-    padding: 13px 12px;
-    font-size: 0.85rem;
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 1rem;
     border-radius: 10px;
+    white-space: normal;
+    text-align: center;
   }
-}
-
-/* Telas bem pequenas: botões empilham */
-@media (max-width: 380px) {
-  .cta-buttons { flex-direction: column; flex-wrap: wrap; }
-  .btn { flex: unset; width: 100%; padding: 14px 20px; font-size: 0.95rem; }
-  h1 { font-size: clamp(1.7rem, 10vw, 2.2rem); }
 }
