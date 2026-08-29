@@ -77,7 +77,36 @@
             </div>
         </section>
     </main>
+
+    <aside class="chat-widget" id="chatWidget" aria-live="polite">
+        <div class="chat-header">
+            <div class="chat-title">
+                <span class="chat-dot"></span>
+                Blue Assistente 
+            </div>
+            <button type="button" class="chat-toggle" id="chatToggle" aria-label="Minimizar chat">−</button>
+        </div>
+
+        <div class="chat-body" id="chatBody"></div>
+
+        <div class="chat-suggestions" aria-label="Sugestões de conversa">
+            <button type="button" class="chip">Quero um site</button>
+            <button type="button" class="chip">Serviços</button>
+            <button type="button" class="chip">Contato</button>
+        </div>
+
+        <div class="chat-input-area">
+            <input id="userInput" type="text" placeholder="Digite sua mensagem..." aria-label="Mensagem do usuário">
+            <button type="button" id="sendBtn" aria-label="Enviar mensagem">Enviar</button>
+        </div>
+
+        <a class="chat-whatsapp" id="chatWhatsapp" href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20quero%20falar%20sobre%20um%20projeto%20digital." target="_blank" rel="noopener noreferrer">
+            Falar no WhatsApp
+        </a>
+    </aside>
+
     <script src="script.js"></script>
+    <script src="chatbot.js"></script>
     <script>
         // Aplica classe .show na logo para ativar a animação de entrada
         const logoEl = document.querySelector('.logo');

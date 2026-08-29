@@ -8,27 +8,31 @@ const quickReplies = document.querySelectorAll('.chip');
 const fallbackResponses = [
   {
     keywords: ['oi', 'olá', 'ola', 'bom dia', 'boa tarde', 'boa noite', 'hello', 'hi'],
-    answer: 'Olá! Sou o assistente virtual da Blue & Soluções. Como posso ajudar você a fortalecer a presença digital do seu negócio?'
+    answer: 'Olá! Sou o assistente virtual da Blue & Soluções. Posso te ajudar com sites, presença digital, orçamento e o melhor caminho para o seu projeto.'
   },
   {
-    keywords: ['serviços', 'servicos', 'serviço', 'soluções', 'solucoes', 'oque voces fazem', 'o que vocês fazem'],
-    answer: 'A Blue & Soluções atua com atendimento, consultoria e soluções digitais para fortalecer negócios e criar experiências mais eficientes e competitivas.'
+    keywords: ['serviços', 'servicos', 'serviço', 'soluções', 'solucoes', 'oque voces fazem', 'o que vocês fazem', 'trabalho', 'projetos'],
+    answer: 'A Blue & Soluções atua com desenvolvimento web, consultoria digital, suporte e soluções para fortalecer a presença da sua empresa no mercado.'
   },
   {
-    keywords: ['contato', 'telefone', 'whatsapp', 'falar', 'atendimento'],
-    answer: 'Você pode entrar em contato com nossa equipe pelo WhatsApp ou pelo formulário do site. Estamos prontos para atender com atenção e estratégia.'
+    keywords: ['contato', 'telefone', 'whatsapp', 'falar', 'atendimento', 'conversar'],
+    answer: 'Você pode falar com nossa equipe pelo WhatsApp ou entrar em contato pelo site. Estamos prontos para atender com atenção e estratégia.'
   },
   {
-    keywords: ['orcamento', 'orçamento', 'preço', 'valor', 'cotacao', 'cotaçao'],
-    answer: 'Para receber uma proposta personalizada, fale com nossa equipe e descreva sua necessidade. Vamos indicar a melhor solução para o seu caso com foco em resultado.'
+    keywords: ['orcamento', 'orçamento', 'preço', 'valor', 'cotacao', 'cotaçao', 'proposta', 'investimento'],
+    answer: 'Para receber uma proposta personalizada, me diga um pouco sobre seu projeto e sua necessidade. Assim, a equipe pode indicar a solução ideal para o seu objetivo.'
   },
   {
-    keywords: ['site', 'website', 'empresa', 'blue', 'soluções'],
-    answer: 'A Blue & Soluções é uma empresa focada em presença digital estratégica, suporte e comunicação eficiente para negócios em crescimento.'
+    keywords: ['site', 'website', 'empresa', 'blue', 'soluções', 'marketing digital', 'presença online'],
+    answer: 'A Blue & Soluções ajuda negócios a crescer com uma presença digital forte, moderna e alinhada com os objetivos da empresa.'
   },
   {
-    keywords: ['obrigado', 'thanks', 'obg'],
-    answer: 'De nada! Estamos sempre à disposição para ajudar seu negócio a crescer com mais inteligência e presença.'
+    keywords: ['quero um site', 'quero site', 'criar site', 'site novo', 'landing page', 'loja virtual'],
+    answer: 'Ótimo! Fale sobre o tipo de projeto, público, objetivos e prazos. Com essas informações, a equipe pode te orientar sobre a melhor solução.'
+  },
+  {
+    keywords: ['obrigado', 'thanks', 'obg', 'valeu'],
+    answer: 'De nada! Estamos sempre à disposição para ajudar seu negócio a crescer com estratégia e presença digital.'
   },
   {
     keywords: ['tchau', 'sair', 'adeus', 'bye'],
@@ -118,4 +122,8 @@ chatToggle.addEventListener('click', () => {
   chatToggle.textContent = isCollapsed ? '+' : '−';
 });
 
-addMessage('Olá! Sou o assistente virtual da Blue & Soluções. Como posso ajudar você a fortalecer a presença digital do seu negócio?', 'bot');
+document.getElementById('chatWhatsapp')?.addEventListener('click', () => {
+  window.open('https://wa.me/5511999999999?text=Ol%C3%A1%2C%20quero%20falar%20sobre%20um%20projeto%20digital.', '_blank');
+});
+
+addMessage('Olá! Sou o assistente virtual da Blue & Soluções. Posso ajudar com sites, presença digital, orçamento e atendimento para o seu negócio.', 'bot');
