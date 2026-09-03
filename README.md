@@ -1,97 +1,110 @@
 # 🔵 Blue & Soluções
 
-> Site em construção da **Blue & Soluções** — empresa de desenvolvimento web e soluções digitais. Construído com HTML, CSS e JavaScript puro, sem frameworks ou dependências externas.
+Site institucional e chatbot de atendimento da Blue & Soluções, criado para apresentar a marca, os serviços e a proposta da empresa em um ambiente moderno, responsivo e profissional.
+
+## 📌 Visão geral
+
+Este projeto combina:
+
+- landing page institucional com identidade visual premium;
+- páginas de serviços e apresentação da empresa;
+- navegação responsiva para desktop e mobile;
+- chatbot interativo para atendimento e resposta automática.
+
+A aplicação foi desenvolvida com HTML, CSS, JavaScript e Python puro, sem dependências de framework.
 
 ---
 
-## 📁 Estrutura do Projeto
-
-```
-blue-e-soluçoes/
-├── index.html          # Página principal (landing page)
-├── minha-historia.html # Página "Minha História" com timeline
-├── styles.css          # Estilos globais (index)
-├── script.js           # Lógica JS (navegação, dropdowns, animações)
-└── BS.png              # Logo da empresa
-```
-
----
-
-## 🚀 Como Rodar
-
-Nenhuma instalação necessária. Por ser HTML/CSS/JS puro, basta abrir no navegador:
+## 📁 Estrutura do projeto
 
 ```bash
-# Opção 1 — abrir diretamente
-Abra o arquivo index.html no seu navegador
+Meu-primeiro-site-/
+├── index.html             # Página principal
+├── consultoria.html       # Página de consultoria
+├── manutencao.html        # Página de manutenção
+├── minha-historia.html    # Página institucional com história da empresa
+├── styles.css             # Estilos globais do site
+├── script.js              # Lógica da navegação e interações do front-end
+├── chatbot.js             # Cliente do chatbot no navegador
+├── chatbot_gratis.py      # Servidor Python para API do chatbot
+├── BS.png                 # Logo da empresa
+├── .env.example           # Exemplo de variáveis de ambiente
+├── README.md              # Documentação do projeto
+
+
+---
+
+## 🚀 Como executar o site
+
+### Opção 1: abrir diretamente
+
+Basta abrir o arquivo `index.html` no navegador.
+
+### Opção 2: rodar localmente com servidor HTTP
+
+
+O servidor ficará disponível em:
+
+```text
+http://localhost:5000
+```
+
+O front-end envia requisições para o endpoint:
+
+
 
 ---
 
 ## ✨ Funcionalidades
 
-### Navegação
-- **Header fixo** com `backdrop-filter: blur` e efeito de sombra ao rolar
-- **Menu dropdown** com animação de entrada/saída e suporte completo a teclado (`Escape` fecha o menu)
-- **Menu hambúrguer** responsivo para mobile, com animação de ícone (☰ → ✕)
-- Fecha dropdown ao clicar fora ou ao navegar para outro item
-
-### Visual & Animações
-- **Logo animada** com entrada suave (`fadeInUp` + `scale`) e efeito `glow` pulsante
-- **Gradiente de fundo** dark com radial-gradients em azul e roxo
-- **Botões CTA** com efeito ripple, hover elevado e animação no ícone
-- **Timeline** na página de história com cards glassmorphism e hover com deslocamento lateral
-
-### Acessibilidade
-- `aria-haspopup`, `aria-expanded`, `aria-controls` nos dropdowns
-- Link "Pular para conteúdo principal" (`skip-link`) na página de história
-- Roles ARIA (`role="menubar"`, `role="menuitem"`, etc.)
-- `aria-live` region para leitores de tela
-- Navegação completa por teclado
-
-### Responsividade
-- Layout adaptado para mobile (`max-width: 768px`)
-- Logo e botões reajustam tamanho e espaçamento
-- Menu colapsável com slide lateral
+- menu responsivo com botão hambúrguer;
+- dropdowns de navegação com acessibilidade;
+- hero section com identidade visual moderna;
+- páginas de serviços e história; 
+- bloco de call-to-action para conversão;
+- chatbot de atendimento com fallback local;
+- design adaptado para mobile.
 
 ---
 
-## 🎨 Design Do Sistema
+## 🧩 Tecnologias
 
-| Token | Valor |
-|---|---|
-| `--primary-color` | `#389fff` |
-| `--secondary-color` | `#0c75ff` |
-| `--bg-dark` | `#0a0a0a` |
-| `--text-color` | `#e4d9d9` |
-| `--gradient` | `linear-gradient(→ #389fff, #0c75ff, #1303f8)` |
-
-**Fontes:** [Chonburi](https://fonts.google.com/specimen/Chonburi) (títulos) + [Poppins](https://fonts.google.com/specimen/Poppins) (corpo)
+- HTML5
+- CSS3
+- JavaScript ES6+
+- Python 3
+- OpenAI API
 
 ---
 
-## 📄 Páginas
+## 📄 Páginas principais
 
-### `index.html` — Principal
-Landing page com hero section, logo animada e dois botões de call-to-action: *Começar projeto* e *Conhecer a Blue*.
+### `index.html`
+Apresenta a empresa, mensagem de marca e principais chamadas para ação.
 
-### `minha-historia.html` — Minha História
-Página com layout de **timeline vertical**, apresentando a origem e missão da Blue & Soluções, e uma seção CTA convidando o visitante a iniciar um projeto.
+### `consultoria.html`
+Página voltada para explicar serviços de consultoria digital e posicionamento estratégico.
 
----
+### `manutencao.html`
+Detalha suporte e manutenção para presença digital e operação de sites.
 
-## 🛠️ Tecnologias
-
-- **HTML5** semântico
-- **CSS3** — variáveis, `@keyframes`, `backdrop-filter`, `clamp()`, Grid & Flexbox
-- **JavaScript** — vanilla ES6+, sem dependências
-- **Google Fonts** — Chonburi + Poppins
+### `minha-historia.html`
+Conta a trajetória e a missão da empresa, com visual em timeline.
 
 ---
 
-## 👤 Sobre
+## 🛠️ Personalização
 
-Projeto criado por **Blue & Soluções** em 2026, desenvolvido como laboratório prático durante o curso de Análise e Desenvolvimento de Sistemas. O objetivo é transformar aprendizado em tecnologia real, entregando presença digital de qualidade.
+Para adaptar o projeto ao seu negócio, você pode alterar:
+
+- textos e mensagens da landing page em `index.html`;
+- estilos e paleta em `styles.css`;
+- prompts e respostas do chatbot em `chatbot_gratis.py`;
 
 ---
 
-> *"Seu negócio não pode ser invisível. A Blue cria seu palco digital."*
+## 👤 Sobre o projeto
+
+Este projeto foi criado como uma solução prática para apresentar uma empresa de tecnologia e soluções digitais com foco em presença online, credibilidade e conversão.
+
+> "Seu negócio não pode ser invisível. A Blue cria seu palco digital."

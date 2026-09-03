@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultoria | Blue & Soluções</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="roboto" data-chat-welcome="Olá! Sou a assistente da Blue & Soluções. Posso explicar nossa consultoria digital e ajudar você a solicitar uma avaliação.">
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo" aria-label="Voltar para a página Principal">
+                    <img src="BS.png" alt="Blue & Soluções" class="nav-logo-img">
+                </a>
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="index.html" class="nav-link">Principal</a></li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="services-menu">Serviços ▼</a>
+                        <ul class="dropdown-menu" id="services-menu" hidden>
+                            <li><a href="consultoria.html" class="dropdown-link">Consultoria</a></li>
+                            <li><a href="manutencao.html" class="dropdown-link">Manutenção</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a href="minha-historia.html" class="nav-link">Sobre</a></li>
+                </ul>
+                <button class="hamburger" type="button" aria-label="Abrir menu de navegação" aria-expanded="false">
+                    <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Consultoria Digital</h1>
+            <p>Estratégia clara para transformar sua presença online em resultado.</p>
+            <p>Analisamos seu momento, identificamos oportunidades e organizamos um plano prático para o crescimento do seu negócio.</p>
+            <div class="cta-buttons">
+                <a href="#chatWidget" class="btn btn-primary chat-open">💬 Falar com o assistente</a>
+                <a href="index.html" class="btn btn-outline">Voltar para Principal</a>
+            </div>
+        </section>
+    </main>
+
+    <aside class="chat-widget" id="chatWidget" aria-live="polite">
+        <div class="chat-header"><div class="chat-title"><span class="chat-dot"></span>Blue Assistente</div><button type="button" class="chat-toggle" id="chatToggle" aria-label="Minimizar chat">−</button></div>
+        <div class="chat-body" id="chatBody"></div>
+        <div class="chat-suggestions" aria-label="Sugestões de conversa"><button type="button" class="chip">Consultoria</button><button type="button" class="chip">Orçamento</button><button type="button" class="chip">Contato</button></div>
+        <div class="chat-input-area"><input id="userInput" type="text" placeholder="Digite sua mensagem..." aria-label="Mensagem do usuário"><button type="button" id="sendBtn" aria-label="Enviar mensagem">Enviar</button></div>
+        <a class="chat-whatsapp" id="chatWhatsapp" href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20quero%20saber%20sobre%20consultoria." target="_blank" rel="noopener noreferrer">Falar no WhatsApp</a>
+    </aside>
+    <script src="script.js"></script>
+    <script src="chatbot.js"></script>
+</body>
+</html>

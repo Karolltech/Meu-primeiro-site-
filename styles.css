@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;0,700;0,900;1,400;1,700&display=swap');
+
+.roboto {
+  font-family: 'Roboto', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
 *, *::before, *::after {
   margin: 0;
   padding: 0;
@@ -623,11 +632,11 @@ p:first-of-type {
   .chat-widget.collapsed {
     left: auto;
     right: 12px;
-    width: min(230px, calc(100vw - 24px));
+    width: min(200px, calc(100vw - 24px));
   }
 
-  .chat-body {
-    max-height: 220px;
+  .media-chat {
+    max-height: 200px;
   }
 
   .chat-whatsapp {

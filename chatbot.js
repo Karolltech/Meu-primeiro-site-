@@ -4,6 +4,8 @@ const sendBtn = document.getElementById('sendBtn');
 const chatToggle = document.getElementById('chatToggle');
 const chatWidget = document.getElementById('chatWidget');
 const quickReplies = document.querySelectorAll('.chip');
+const serviceLinks = document.querySelectorAll('.service-chat');
+const chatOpenLinks = document.querySelectorAll('.chat-open');
 
 if (window.matchMedia('(max-width: 768px)').matches) {
   chatWidget.classList.add('collapsed');
@@ -12,6 +14,14 @@ if (window.matchMedia('(max-width: 768px)').matches) {
 }
 
 const fallbackResponses = [
+  {
+    keywords: ['consultoria', 'consultoria digital'],
+    answer: 'Na consultoria digital, analisamos sua presença online, identificamos oportunidades e montamos um plano prático para melhorar os resultados do seu negócio. Quer solicitar uma avaliação?'
+  },
+  {
+    keywords: ['manutenção', 'manutencao', 'manter site', 'suporte técnico', 'suporte tecnico'],
+    answer: 'O serviço de manutenção mantém seu site seguro, atualizado e funcionando corretamente, com correções, melhorias e suporte técnico. Quer saber como contratar?'
+  },
   {
     keywords: ['oi', 'olá', 'ola', 'bom dia', 'boa tarde', 'boa noite', 'hello', 'hi'],
     answer: 'Olá! Sou o assistente virtual da Blue & Soluções. Posso te ajudar com sites, presença digital, orçamento e o melhor caminho para o seu projeto.'
@@ -71,6 +81,10 @@ function getLocalReply(input) {
 }
 
 async function getBotReply(input) {
+  if (window.location.protocol === 'file:') {
+    return getLocalReply(input);
+  }
+
   try {
     const response = await fetch('/api/chat', {
       method: 'POST',
@@ -122,6 +136,30 @@ quickReplies.forEach((button) => {
   });
 });
 
+serviceLinks.forEach((link) => {
+  link.addEventListener('click', (event) => {
+    event.preventDefault();
+    const message = link.dataset.chatMessage;
+    if (!message) return;
+
+    chatWidget.classList.remove('collapsed');
+    chatToggle.textContent = '−';
+    chatToggle.setAttribute('aria-label', 'Minimizar chat');
+    userInput.value = message;
+    sendMessage();
+  });
+});
+
+chatOpenLinks.forEach((link) => {
+  link.addEventListener('click', (event) => {
+    event.preventDefault();
+    chatWidget.classList.remove('collapsed');
+    chatToggle.textContent = '−';
+    chatToggle.setAttribute('aria-label', 'Minimizar chat');
+    userInput.focus();
+  });
+});
+
 chatToggle.addEventListener('click', () => {
   chatWidget.classList.toggle('collapsed');
   const isCollapsed = chatWidget.classList.contains('collapsed');
@@ -133,4 +171,5 @@ document.getElementById('chatWhatsapp')?.addEventListener('click', () => {
   window.open('https://wa.me/5511999999999?text=Ol%C3%A1%2C%20quero%20falar%20sobre%20um%20projeto%20digital.', '_blank');
 });
 
-addMessage('Olá! Sou o assistente virtual da Blue & Soluções. Posso ajudar com sites, presença digital, orçamento e atendimento para o seu negócio.', 'bot');
+const welcomeMessage = document.body.dataset.chatWelcome || 'Olá! Sou o assistente virtual da Blue & Soluções. Posso ajudar com sites, presença digital, orçamento e atendimento para o seu negócio.';
+addMessage(welcomeMessage, 'bot');
