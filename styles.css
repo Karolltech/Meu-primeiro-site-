@@ -39,8 +39,8 @@ body::before {
   top: 0; left: 0; right: 0;
   height: var(--header-height);
   background: rgba(10,10,10,0.95);
-  backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(56,159,255,0.2);
   z-index: 1000;
   transition: box-shadow 0.3s ease;
@@ -109,6 +109,7 @@ body::before {
   top: calc(100% + 8px);
   left: 0;
   background: rgba(10,10,10,0.97);
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(56,159,255,0.2);
   border-radius: 10px;
@@ -192,6 +193,7 @@ main {
   border-radius: 20px;
   padding: 14px;
   background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.04));
+  -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255,255,255,0.1);
   filter: drop-shadow(0 0 30px rgba(56,159,255,0.4))
@@ -235,8 +237,8 @@ h1 {
   font-family: "Chonburi", serif;
   font-size: clamp(2.2rem, 5vw, 4.5rem);
   background: var(--gradient);
-  background-clip: text;
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
   margin: 0 0 24px 0;
@@ -316,6 +318,7 @@ p:first-of-type {
   background: rgba(56,159,255,0.07);
   color: var(--primary-color);
   border: 1.5px solid rgba(56,159,255,0.45);
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
 .btn-outline:hover {
@@ -344,8 +347,8 @@ p:first-of-type {
   box-shadow: 0 18px 50px rgba(0, 0, 0, 0.42);
   overflow: hidden;
   z-index: 1200;
-  backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
 }
 
 .chat-widget.collapsed .chat-body,
@@ -527,6 +530,7 @@ p:first-of-type {
     flex-direction: column;
     align-items: stretch;
     background: rgba(10,10,10,0.98);
+    -webkit-backdrop-filter: blur(16px);
     backdrop-filter: blur(16px);
     padding: 16px 16px 28px;
     gap: 4px;
@@ -568,8 +572,8 @@ p:first-of-type {
   /* Main: empilha logo acima do hero */
   main {
     flex-direction: column;
-    padding: 32px 24px 60px;
-    gap: 32px;
+    padding: 24px 20px 48px;
+    gap: 24px;
     min-height: unset;
     padding-top: calc(var(--header-height) + 32px);
     align-items: center;
@@ -577,7 +581,7 @@ p:first-of-type {
 
   /* Logo: tamanho proporcional, centralizada */
   .logo {
-    width: clamp(130px, 42vw, 200px);
+    width: clamp(120px, 34vw, 170px);
     align-self: center;
   }
 
@@ -586,16 +590,16 @@ p:first-of-type {
     max-width: 100%;
   }
 
-  h1 { font-size: clamp(2rem, 9vw, 2.8rem); margin-bottom: 18px; }
-  p  { font-size: 0.95rem; }
-  p:first-of-type { font-size: 1.05rem; }
+  h1 { font-size: clamp(1.85rem, 9vw, 2.55rem); margin-bottom: 16px; }
+  p  { font-size: 0.92rem; line-height: 1.65; }
+  p:first-of-type { font-size: 1rem; margin-bottom: 14px; }
 
   /* Botões empilhados em coluna no mobile */
   .cta-buttons {
     flex-direction: column;
     align-items: stretch;
     gap: 12px;
-    margin-top: 24px;
+    margin-top: 20px;
   }
 
   .btn {
@@ -611,9 +615,15 @@ p:first-of-type {
   .chat-widget {
     left: 8px;
     right: 8px;
-    bottom: 8px;
+    bottom: max(8px, env(safe-area-inset-bottom));
     width: auto;
     max-width: none;
+  }
+
+  .chat-widget.collapsed {
+    left: auto;
+    right: 12px;
+    width: min(230px, calc(100vw - 24px));
   }
 
   .chat-body {

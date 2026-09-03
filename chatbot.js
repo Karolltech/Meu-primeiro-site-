@@ -5,6 +5,12 @@ const chatToggle = document.getElementById('chatToggle');
 const chatWidget = document.getElementById('chatWidget');
 const quickReplies = document.querySelectorAll('.chip');
 
+if (window.matchMedia('(max-width: 768px)').matches) {
+  chatWidget.classList.add('collapsed');
+  chatToggle.textContent = '+';
+  chatToggle.setAttribute('aria-label', 'Abrir chat');
+}
+
 const fallbackResponses = [
   {
     keywords: ['oi', 'olá', 'ola', 'bom dia', 'boa tarde', 'boa noite', 'hello', 'hi'],
@@ -120,6 +126,7 @@ chatToggle.addEventListener('click', () => {
   chatWidget.classList.toggle('collapsed');
   const isCollapsed = chatWidget.classList.contains('collapsed');
   chatToggle.textContent = isCollapsed ? '+' : '−';
+  chatToggle.setAttribute('aria-label', isCollapsed ? 'Abrir chat' : 'Minimizar chat');
 });
 
 document.getElementById('chatWhatsapp')?.addEventListener('click', () => {
