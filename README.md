@@ -28,7 +28,6 @@ Meu-primeiro-site-/
 ├── chatbot.js             # Cliente do chatbot no navegador
 ├── chatbot_gratis.py      # Servidor Python para API do chatbot
 ├── BS.png                 # Logo da empresa
-├── .env.example           # Exemplo de variáveis de ambiente
 ├── README.md              # Documentação do projeto
 
 
