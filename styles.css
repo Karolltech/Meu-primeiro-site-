@@ -606,4 +606,22 @@ p:first-of-type {
     white-space: normal;
     text-align: center;
   }
+
+  /* Chat em tela pequena: ocupa quase toda a largura e fica alinhado ao rodapé */
+  .chat-widget {
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    width: auto;
+    max-width: none;
+  }
+
+  .chat-body {
+    max-height: 220px;
+  }
+
+  .chat-whatsapp {
+    width: calc(100% - 16px);
+    margin: 0 8px 8px;
+  }
 }
